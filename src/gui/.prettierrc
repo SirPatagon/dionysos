@@ -6,5 +6,6 @@
     "bracketSameLine": true,
     "arrowParens": "avoid",
     "editorconfig": true,
-    "endOfLine": "crlf"
+    "endOfLine": "crlf",
+    "htmlWhitespaceSensitivity": "ignore"
 }
