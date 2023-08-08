@@ -31,7 +31,7 @@
                     <feFuncA type="table" tableValues="1 0" />
                 </feComponentTransfer>
                 <feGaussianBlur stdDeviation="4" />
-                <feOffset dx="0" dy="5" result="offsetblur" />
+                <feOffset dx="5" dy="5" result="offsetblur" />
                 <feFlood flood-color="rgb(0, 0, 0)" result="color" />
                 <feComposite in2="offsetblur" operator="in" />
                 <feComposite in2="SourceAlpha" operator="in" />
@@ -152,14 +152,13 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .blob {
-    display: inline-flex;
+    display: inline-flex !important; // !important is a dirty hack because parallax.js won't tell me why it overwrites the display attribute
     width: 250px;
     height: 250px;
     justify-content: center;
     align-items: center;
     overflow: visible;
     position: relative;
-    transition: all 0.2s ease;
 
     svg {
         width: 200px;

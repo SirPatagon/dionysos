@@ -1,13 +1,14 @@
 <template>
     <main id="mainMenu" :style="{ transform: `translate(-50%, -50%) scale(${scale})` }">
-        <img src="res/images/logo_light.svg" />
-        <BlobLink to="/about" image="res/images/logo_light.svg" text="foo" />
-        <BlobLink to="/about" image="" text="bar" />
+        <img data-depth="0.2" src="res/images/logo_light.svg" />
+        <BlobLink data-depth="0.1" to="/about" image="res/images/logo_light.svg" text="foo" />
+        <BlobLink data-depth="0.1" to="/about" image="" text="bar" />
     </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Parallax from 'parallax-js';
 import BlobLink from '@/components/Home/BlobLink.vue';
 
 export default defineComponent({
@@ -26,6 +27,10 @@ export default defineComponent({
     mounted() {
         window.addEventListener('resize', this.updateScale);
         this.updateScale();
+
+        new Parallax(document.getElementById('mainMenu'), {
+            pointerEvents: true,
+        });
     },
     methods: {
         updateScale() {
@@ -58,14 +63,15 @@ export default defineComponent({
     > .blob {
         position: absolute;
 
+        // !important is a dirty hack because parallax.js won't tell me why it overwrites the display attribute
         &:nth-of-type(1) {
-            top: 100px;
-            left: 50px;
+            top: 100px !important;
+            left: 50px !important;
         }
 
         &:nth-of-type(2) {
-            top: 0px;
-            left: 250px;
+            top: 0px !important;
+            left: 250px !important;
         }
     }
 }
