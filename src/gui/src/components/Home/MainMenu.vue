@@ -3,6 +3,7 @@
         <img data-depth="0.2" src="res/images/logo_light.svg" />
         <BlobLink data-depth="0.1" to="/about" image="res/images/logo_light.svg" text="foo" />
         <BlobLink data-depth="0.1" to="/about" image="" text="bar" />
+        <audio src="res/sounds/New York, 1924.mp3"></audio>
     </main>
 </template>
 
@@ -31,6 +32,10 @@ export default defineComponent({
         new Parallax(document.getElementById('mainMenu'), {
             pointerEvents: true,
         });
+        var theme = new Audio('res/sounds/New York, 1924.mp3');
+        theme.loop = true;
+        theme.volume = 0.2;
+        theme.play().catch();
     },
     methods: {
         updateScale() {
