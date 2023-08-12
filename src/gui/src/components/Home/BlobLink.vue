@@ -14,11 +14,7 @@
                         <rect :fill="`url(\'#gradient${id}\')`" width="200" height="200"></rect>
                         <g id="content">
                             <image v-if="image" :href="image" x="0" y="0" width="200" height="200" />
-                            <text
-                                x="50%"
-                                y="50%"
-                                dominant-baseline="middle"
-                                text-anchor="middle"
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
                                 style="color: white; font-weight: bold; font-size: 2em">
                                 {{ text }}
                             </text>
@@ -55,13 +51,13 @@ export default defineComponent({
     props: ['to', 'image', 'text'],
     data() {
         return {
-            id: '',
+            id: NaN,
             path: '',
             gradientInfo: '',
             noiseStep: 0.005,
         };
     },
-    mounted(this: any) {
+    mounted() {
         this.id = this.$.uid;
 
         let hueNoiseOffset = 0;
@@ -191,6 +187,7 @@ export default defineComponent({
         transform: translate(-50%, -50%);
         height: 100%;
         width: 100%;
+
         svg {
             width: 600vw;
             height: 600vh;

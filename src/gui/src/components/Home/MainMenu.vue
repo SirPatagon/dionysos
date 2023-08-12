@@ -3,7 +3,7 @@
         <img data-depth="0.2" src="res/images/logo_light.svg" />
         <BlobLink data-depth="0.1" to="/about" image="res/images/logo_light.svg" text="foo" />
         <BlobLink data-depth="0.1" to="/about" image="" text="bar" />
-        <audio src="res/sounds/New York, 1924.mp3"></audio>
+        <AudioPlayer src="res/sounds/New York, 1924.mp3" :autoplay="true" />
     </main>
 </template>
 
@@ -11,6 +11,8 @@
 import { defineComponent } from 'vue';
 import Parallax from 'parallax-js';
 import BlobLink from '@/components/Home/BlobLink.vue';
+import AudioPlayer from '../AudioPlayer.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
     name: 'MainMenu',
@@ -24,18 +26,23 @@ export default defineComponent({
     },
     components: {
         BlobLink,
+        AudioPlayer,
     },
     mounted() {
         window.addEventListener('resize', this.updateScale);
         this.updateScale();
+        // Array.prototype.forEach.call(document.getElementsByClassName('blob'), el => {
+        //     new Parallax(el, {
+        //         relativeInput: true,
+        //         pointerEvents: true,
+        //     });
+        // });
+        //useStore().
 
         new Parallax(document.getElementById('mainMenu'), {
             pointerEvents: true,
+            selector: 'img, .blob',
         });
-        var theme = new Audio('res/sounds/New York, 1924.mp3');
-        theme.loop = true;
-        theme.volume = 0.2;
-        theme.play().catch();
     },
     methods: {
         updateScale() {
@@ -62,10 +69,11 @@ export default defineComponent({
     transform: translate(-50%, -50%);
     transform-origin: center center;
 
-    > img {
+    >img {
         width: 400px;
     }
-    > .blob {
+
+    >.blob {
         position: absolute;
 
         // !important is a dirty hack because parallax.js won't tell me why it overwrites the display attribute
@@ -79,5 +87,11 @@ export default defineComponent({
             left: 250px !important;
         }
     }
+}
+
+.audio-player {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 </style>
